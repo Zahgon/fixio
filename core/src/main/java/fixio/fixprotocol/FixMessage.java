@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.fixprotocol;
 
 import java.util.ArrayList;
@@ -25,10 +24,15 @@ import java.util.List;
 public interface FixMessage {
 
     String FIX_4_0 = "FIX.4.0";
+
     String FIX_4_1 = "FIX.4.1";
+
     String FIX_4_2 = "FIX.4.2";
+
     String FIX_4_3 = "FIX.4.3";
+
     String FIX_4_4 = "FIX.4.4";
+
     String FIX_5_0 = "FIXT.1.1";
 
     FixMessageHeader getHeader();
@@ -55,37 +59,14 @@ public interface FixMessage {
     String getMessageType();
 
     default FixMessageFragment getFirst(int tagNum) {
-        final List<FixMessageFragment> body = getBody();
-        for (int i = 0; i < body.size(); i++) {
-            FixMessageFragment item = body.get(i);
-            if (item.getTagNum() == tagNum) {
-                return item;
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default List<FixMessageFragment> getAll(int tagNum) {
-        final List<FixMessageFragment> body = getBody();
-        List<FixMessageFragment> result = new ArrayList<>(8);
-        for (int i = 0; i < body.size(); i++) {
-            FixMessageFragment item = body.get(i);
-            if (item.getTagNum() == tagNum) {
-                result.add(item);
-            }
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     default FixMessageFragment getLast(int tagNum) {
-        final List<FixMessageFragment> body = getBody();
-        for (int i = body.size() - 1; i >= 0; i--) {
-            FixMessageFragment item = body.get(i);
-            if (item.getTagNum() == tagNum) {
-                return item;
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

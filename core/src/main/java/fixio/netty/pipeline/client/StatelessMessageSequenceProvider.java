@@ -27,16 +27,16 @@ public class StatelessMessageSequenceProvider implements MessageSequenceProvider
     }
 
     public static StatelessMessageSequenceProvider getInstance() {
-        return INSTANCE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getMsgOutSeqNum() {
-        return 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getMsgInSeqNum() {
-        return 1;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

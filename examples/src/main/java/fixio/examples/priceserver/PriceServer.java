@@ -20,7 +20,6 @@ import fixio.examples.common.Quote;
 import fixio.examples.common.QuoteGeneratorTask;
 import fixio.netty.pipeline.InMemorySessionRepository;
 import fixio.netty.pipeline.server.AcceptAllAuthenticator;
-
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class PriceServer {
@@ -30,32 +29,25 @@ public class PriceServer {
     private final ArrayBlockingQueue<Quote> quoteQueue = new ArrayBlockingQueue<>(8192);
 
     private final FixServer server;
+
     private Thread generator;
+
     private QuoteGeneratorTask generatorTask;
 
     public PriceServer(int port) {
         PriceStreamingApp app = new PriceStreamingApp(quoteQueue);
-        server = new FixServer(port, app,
-                new AcceptAllAuthenticator(),
-                new InMemorySessionRepository()
-        );
+        server = new FixServer(port, app, new AcceptAllAuthenticator(), new InMemorySessionRepository());
     }
 
     public static void main(String[] args) throws InterruptedException {
-        PriceServer priceServer = new PriceServer(DEFAULT_PORT);
-        priceServer.start();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void start() throws InterruptedException {
-        generatorTask = new QuoteGeneratorTask(quoteQueue);
-        generator = new Thread(generatorTask, "QuoteGenerator");
-        server.start();
-        generator.start();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void stop() throws InterruptedException {
-        generatorTask.stop();
-        server.stop();
-        generator.join();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

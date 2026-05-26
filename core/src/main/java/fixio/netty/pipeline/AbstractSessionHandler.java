@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline;
 
 import fixio.events.LogoutEvent;
@@ -33,20 +32,19 @@ import io.netty.handler.codec.MessageToMessageCodec;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
-
 import java.util.List;
 
 public abstract class AbstractSessionHandler extends MessageToMessageCodec<FixMessage, FixMessageBuilder> {
 
     public static final AttributeKey<FixSession> FIX_SESSION_KEY = AttributeKey.valueOf("fixSession");
+
     private final FixApplication fixApplication;
+
     private final FixClock fixClock;
+
     private final SessionRepository sessionRepository;
 
-
-    protected AbstractSessionHandler(FixApplication fixApplication,
-                                     FixClock fixClock,
-                                     SessionRepository sessionRepository) {
+    protected AbstractSessionHandler(FixApplication fixApplication, FixClock fixClock, SessionRepository sessionRepository) {
         assert (fixApplication != null) : "FixApplication is required";
         assert (fixClock != null) : "Clock is required";
         this.fixApplication = fixApplication;
@@ -76,25 +74,15 @@ public abstract class AbstractSessionHandler extends MessageToMessageCodec<FixMe
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-        Attribute<FixSession> fixSessionAttribute = ctx.channel().attr(FIX_SESSION_KEY);
-        if (fixSessionAttribute != null) {
-            FixSession session = fixSessionAttribute.getAndSet(null);
-            if (session != null) {
-                ctx.fireChannelRead(new LogoutEvent(session));
-                sessionRepository.removeSession(session.getId());
-                getLogger().info("Fix Session Closed. {}", session);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void prepareMessageToSend(ChannelHandlerContext ctx, FixMessageBuilder response) {
-        prepareMessageToSend(ctx, getSession(ctx), response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected void prepareMessageToSend(ChannelHandlerContext ctx, FixSession session, FixMessageBuilder response) {
-        session.prepareOutgoing(response);
-        response.getHeader().setSendingTime(fixClock.now());
-        getFixApplication().beforeSendMessage(ctx, response);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -104,68 +92,39 @@ public abstract class AbstractSessionHandler extends MessageToMessageCodec<FixMe
      * @return FixSession or null, if session not established.
      */
     protected FixSession getSession(ChannelHandlerContext ctx) {
-        Attribute<FixSession> fixSessionAttribute = ctx.channel().attr(FIX_SESSION_KEY);
-        return fixSessionAttribute.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected boolean setSession(ChannelHandlerContext ctx, FixSession fixSession) {
-        assert (fixSession != null) : "Parameter 'fixSession' expected.";
-        Attribute<FixSession> fixSessionAttribute = ctx.channel().attr(FIX_SESSION_KEY);
-        return fixSessionAttribute.compareAndSet(null, fixSession);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void encode(ChannelHandlerContext ctx, FixMessageBuilder msg, List<Object> out) throws Exception {
-        prepareMessageToSend(ctx, msg);
-        getLogger().trace("Sending outbound: {}", msg);
-        out.add(msg);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void decode(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) throws Exception {
-        FixSession session = getSession(ctx);
-        if (session == null) {
-            getLogger().error("Session not established. Skipping message: {}", msg);
-            ctx.channel().close();
-            return;
-        }
-
-        FixMessageHeader header = msg.getHeader();
-
-        final int msgSeqNum = header.getMsgSeqNum();
-        if (!session.checkAndIncrementIncomingSeqNum(msgSeqNum)) {
-            getLogger().error("MessageSeqNum={} != expected {}.", msgSeqNum, session.getNextIncomingMessageSeqNum());
-        }
-        out.add(msg);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        if (cause instanceof BusinessRejectException exception) {
-            FixMessageBuilderImpl businessMessageReject = createBusinessReject(exception);
-            ctx.channel().writeAndFlush(businessMessageReject);
-        } else {
-            super.exceptionCaught(ctx, cause);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected abstract Logger getLogger();
 
     protected void sendReject(ChannelHandlerContext ctx, FixMessage originalMsg, boolean closeConnection) {
-        final FixMessageBuilderImpl reject = createReject(originalMsg);
-
-        ChannelFuture channelFuture = ctx.writeAndFlush(reject);
-        if (closeConnection) {
-            channelFuture.addListener(ChannelFutureListener.CLOSE);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected FixApplication getFixApplication() {
-        return fixApplication;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected SessionRepository getSessionRepository() {
-        return sessionRepository;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

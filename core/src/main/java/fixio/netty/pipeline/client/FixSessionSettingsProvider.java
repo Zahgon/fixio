@@ -13,11 +13,10 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.client;
 
-
 public interface FixSessionSettingsProvider {
+
     String getSenderCompID();
 
     String getSenderSubID();
@@ -36,7 +35,8 @@ public interface FixSessionSettingsProvider {
 
     int getHeartbeatInterval();
 
-    String getTimeStampPrecision(); // Valid values are "SECONDS", "MILLIS", "MICROS", "NANOS". Default is "MILLIS"
+    // Valid values are "SECONDS", "MILLIS", "MICROS", "NANOS". Default is "MILLIS"
+    String getTimeStampPrecision();
 
     String getDefaultApplVerID();
 
@@ -45,10 +45,11 @@ public interface FixSessionSettingsProvider {
     String getProperty(String key, String defaultValue);
 
     default boolean getBooleanProperty(String key, boolean defaultValue) {
-        return Boolean.parseBoolean(getProperty(key, "" + defaultValue));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     final class Params {
+
         public static final String SSL = "ssl";
     }
 }

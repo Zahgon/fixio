@@ -29,7 +29,6 @@ import fixio.handlers.FixApplicationAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +39,7 @@ import java.util.stream.Collectors;
 class PriceStreamingApp extends FixApplicationAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PriceStreamingApp.class);
+
     private final Map<String, ChannelHandlerContext> subscriptions = new ConcurrentHashMap<>();
 
     public PriceStreamingApp(BlockingQueue<Quote> quoteQueue) {
@@ -54,19 +54,17 @@ class PriceStreamingApp extends FixApplicationAdapter {
 
     @Override
     public void onLogon(ChannelHandlerContext ctx, LogonEvent msg) {
-        LOGGER.info("Client Connected.");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void onLogout(ChannelHandlerContext ctx, LogoutEvent msg) {
-        LOGGER.info("Logout. Session={}", msg.getSession());
-        stopStreaming(ctx);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        stopStreaming(ctx);
-        super.exceptionCaught(ctx, cause);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void stopStreaming(ChannelHandlerContext ctx) {
@@ -78,33 +76,14 @@ class PriceStreamingApp extends FixApplicationAdapter {
 
     @Override
     public void onMessage(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) {
-        String reqId;
-        final String messageType = msg.getMessageType();
-        switch (messageType) {
-            case MessageTypes.QUOTE_REQUEST:
-                reqId = msg.getString(FieldType.QuoteReqID);
-                subscriptions.put(reqId, ctx);
-                LOGGER.debug("Subscribed with QuoteReqID={}", reqId);
-                break;
-            case MessageTypes.QUOTE_CANCEL:
-                reqId = msg.getString(FieldType.QuoteReqID);
-                subscriptions.remove(reqId);
-                LOGGER.debug("Unsubscribed with QuoteReqID={}", reqId);
-                break;
-            default:
-                LOGGER.debug("Unsupported message type: {}", messageType);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static FixMessageBuilder createQuoteMessage(String reqId, Quote quote) {
         FixMessageBuilderImpl message = new FixMessageBuilderImpl(MessageTypes.QUOTE, 3);
         message.add(FieldType.QuoteReqID, reqId);
-
-        message.add(FieldType.MktBidPx,
-                new FixedPointNumber(quote.getBid(), 2));
-        message.add(FieldType.MktOfferPx,
-                new FixedPointNumber(quote.getOffer(), 2));
-
+        message.add(FieldType.MktBidPx, new FixedPointNumber(quote.getBid(), 2));
+        message.add(FieldType.MktOfferPx, new FixedPointNumber(quote.getOffer(), 2));
         return message;
     }
 
@@ -116,12 +95,7 @@ class PriceStreamingApp extends FixApplicationAdapter {
 
         @Override
         protected void sendQuotes(List<Quote> buffer) {
-            buffer.forEach(quote -> {
-                for (Map.Entry<String, ChannelHandlerContext> subscriptionEntry : subscriptions.entrySet()) {
-                    publish(subscriptionEntry.getValue(), subscriptionEntry.getKey(), quote);
-                }
-            });
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 }

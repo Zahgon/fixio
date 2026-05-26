@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.server;
 
 import fixio.events.LogonEvent;
@@ -32,18 +31,17 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class ServerSessionHandler extends AbstractSessionHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ServerSessionHandler.class);
+
     private final FixAuthenticator authenticator;
+
     private final int heartbeatIntervalSec = 30;
 
-    public ServerSessionHandler(FixApplication fixApplication,
-                                FixAuthenticator authenticator,
-                                SessionRepository sessionRepository) {
+    public ServerSessionHandler(FixApplication fixApplication, FixAuthenticator authenticator, SessionRepository sessionRepository) {
         super(fixApplication, FixClock.systemUTC(), sessionRepository);
         assert (authenticator != null) : "FixAuthenticator is required for ServerSessionHandler";
         this.authenticator = authenticator;
@@ -51,12 +49,12 @@ public class ServerSessionHandler extends AbstractSessionHandler {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        LOGGER.info("Connection established. Waiting for Logon.");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected Logger getLogger() {
-        return LOGGER;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private FixMessageBuilder createLogonResponse() {
@@ -67,65 +65,12 @@ public class ServerSessionHandler extends AbstractSessionHandler {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) throws Exception {
-        LOGGER.debug("Message Received: {}", msg);
-
-        FixSession fixSession = getSession(ctx);
-        final FixMessageHeader header = msg.getHeader();
-        if (MessageTypes.LOGON.equals(header.getMessageType())) {
-
-            LOGGER.debug("Logon request: {}", msg);
-            if (fixSession != null) {
-                throw new IllegalStateException("Duplicate Logon Request. Session Already Established.");
-            } else {
-                if (authenticator.authenticate(msg)) {
-                    fixSession = initSession(ctx, header);
-
-                    final int msgSeqNum = header.getMsgSeqNum();
-                    int expectedMsgSeqNum = -1;
-
-                    boolean seqTooHigh = false;
-                    if (!fixSession.checkAndIncrementIncomingSeqNum(msgSeqNum)) {
-                        expectedMsgSeqNum = fixSession.getNextIncomingMessageSeqNum();
-                        if (msgSeqNum < expectedMsgSeqNum) {
-                            sendLogoutAndClose(ctx, fixSession, "Sequence Number Too Low. Expected = " + expectedMsgSeqNum);
-                            return;
-                        } else {
-                            seqTooHigh = true;
-                        }
-                    }
-
-                    final FixMessageBuilder logonResponse = createLogonResponse();
-                    prepareMessageToSend(ctx, fixSession, logonResponse);
-                    LOGGER.info("Sending Logon Response: {}", logonResponse);
-                    ctx.write(logonResponse);
-
-                    if (seqTooHigh) {
-                        assert (expectedMsgSeqNum > 0);
-                        FixMessageBuilder resendRequest = new FixMessageBuilderImpl(MessageTypes.RESEND_REQUEST);
-                        resendRequest.add(FieldType.BeginSeqNo, expectedMsgSeqNum);
-                        resendRequest.add(FieldType.EndSeqNo, msgSeqNum - 1);
-                        prepareMessageToSend(ctx, fixSession, resendRequest);
-                        ctx.write(resendRequest);
-                    }
-                    ctx.flush();
-                    out.add(new LogonEvent(fixSession));
-
-                } else {
-                    //If the authentication (of the session initiator's logon message) fails,
-                    // the session acceptor should shut down the connection.
-                    ctx.close();
-                }
-            }
-        } else {
-            super.decode(ctx, msg, out);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private FixSession initSession(ChannelHandlerContext ctx, FixMessageHeader header) {
         FixSession session = getSessionRepository().getOrCreateSession(header);
-
         session.setNextOutgoingMessageSeqNum(1);
-
         setSession(ctx, session);
         LOGGER.info("Fix Session Established.");
         return session;
@@ -133,12 +78,10 @@ public class ServerSessionHandler extends AbstractSessionHandler {
 
     private void sendLogoutAndClose(ChannelHandlerContext ctx, FixSession session, String text) {
         //rejected logon
-
         FixMessageBuilderImpl logout = new FixMessageBuilderImpl(MessageTypes.LOGOUT);
         if (text != null) {
             logout.add(58, text);
         }
-
         prepareMessageToSend(ctx, session, logout);
         ctx.writeAndFlush(logout).addListener(ChannelFutureListener.CLOSE);
     }

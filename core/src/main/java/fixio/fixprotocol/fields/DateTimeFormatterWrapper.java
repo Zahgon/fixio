@@ -8,10 +8,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 
 public class DateTimeFormatterWrapper {
+
     private final String pattern;
+
     private final ZoneId zoneId;
+
     private final DateTimeFormatter dateTimeFormatter;
+
     private final String padding;
+
     private final int paddingLen;
 
     public DateTimeFormatterWrapper(String pattern, ZoneId zoneId) {
@@ -29,51 +34,34 @@ public class DateTimeFormatterWrapper {
     }
 
     public String getPattern() {
-        return pattern;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ZoneId getZoneId() {
-        return zoneId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public DateTimeFormatter getDateTimeFormatter() {
-        return dateTimeFormatter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getPadding() {
-        return padding;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-
     public String format(TemporalAccessor value) {
-        return dateTimeFormatter.format(value) + padding;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public LocalDate parseLocalDate(String timestampString) {
-        return LocalDate.parse(timestampString, dateTimeFormatter);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public LocalTime parseLocalTime(String timestampString) {
-        if (timestampString != null) {
-            if (paddingLen > 0) {
-                int idx = timestampString.length() - paddingLen;
-                return LocalTime.parse(timestampString.substring(0, idx), dateTimeFormatter);
-            } else {
-                return LocalTime.parse(timestampString, dateTimeFormatter);
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ZonedDateTime parseZonedDateTime(String timestampString) {
-        if (timestampString != null) {
-            if (paddingLen > 0) {
-                int idx = timestampString.length() - paddingLen;
-                return ZonedDateTime.parse(timestampString.substring(0, idx), dateTimeFormatter);
-            } else {
-                return ZonedDateTime.parse(timestampString, dateTimeFormatter);
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline;
 
 import fixio.fixprotocol.FixMessage;
@@ -22,9 +21,7 @@ import fixio.fixprotocol.MessageTypes;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
-
 import java.util.List;
-
 import static fixio.fixprotocol.FieldType.TestReqID;
 
 /**
@@ -36,19 +33,11 @@ import static fixio.fixprotocol.FieldType.TestReqID;
 public class TestRequestHandler extends MessageToMessageDecoder<FixMessage> {
 
     public boolean acceptInboundMessage(Object msg) {
-        return (msg instanceof FixMessage fm
-                && MessageTypes.TEST_REQUEST.equals(fm.getMessageType()));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void decode(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) {
-        if (!MessageTypes.TEST_REQUEST.equals(msg.getMessageType())) {
-            return;
-        }
-        final String testReqId = msg.getString(TestReqID);
-        final FixMessageBuilderImpl builder = new FixMessageBuilderImpl(MessageTypes.HEARTBEAT);
-        builder.add(TestReqID, testReqId);
-
-        ctx.channel().writeAndFlush(builder);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

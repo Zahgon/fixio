@@ -16,7 +16,6 @@
 package fixio.netty.pipeline;
 
 import fixio.fixprotocol.FixConst;
-
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -32,8 +31,11 @@ public class FixClock extends Clock {
     private static final FixClock INSTANCE = new FixClock(Clock.system(FixConst.DEFAULT_ZONE_ID));
 
     private final Clock clock;
+
     private final ZoneId zoneId;
+
     private final long initialNanos;
+
     private final Instant initialInstant;
 
     private FixClock(Clock clock) {
@@ -44,25 +46,25 @@ public class FixClock extends Clock {
     }
 
     public static FixClock systemUTC() {
-        return INSTANCE;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Instant instant() {
-        return initialInstant.plusNanos(System.nanoTime() - initialNanos);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ZoneId getZone() {
-        return zoneId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public FixClock withZone(final ZoneId zone) {
-        return new FixClock(clock.withZone(zone));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ZonedDateTime now() {
-        return ZonedDateTime.now(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

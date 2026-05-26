@@ -18,13 +18,6 @@ public abstract class AbstractQuoteStreamingWorker implements Runnable {
 
     @Override
     public void run() {
-        final List<Quote> buffer = new ArrayList<>(BUFFER_LENGTH);
-        //noinspection InfiniteLoopStatement
-        while (true) {
-            quoteQueue.drainTo(buffer, BUFFER_LENGTH);
-            sendQuotes(buffer);
-            buffer.clear();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

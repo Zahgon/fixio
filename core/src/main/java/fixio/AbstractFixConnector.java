@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio;
 
 import fixio.handlers.FixApplication;
@@ -28,6 +27,7 @@ import fixio.netty.pipeline.SessionRepository;
 public abstract class AbstractFixConnector {
 
     private final FixApplication fixApplication;
+
     private final SessionRepository sessionRepository;
 
     protected AbstractFixConnector(FixApplication fixApplication, SessionRepository sessionRepository) {
@@ -36,10 +36,10 @@ public abstract class AbstractFixConnector {
     }
 
     protected FixApplication getFixApplication() {
-        return fixApplication;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected SessionRepository getSessionRepository() {
-        return sessionRepository;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

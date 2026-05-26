@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.server;
 
 import fixio.fixprotocol.FixMessage;
@@ -28,12 +27,10 @@ import io.netty.handler.codec.MessageToMessageCodec;
 public class FixAcceptorChannelInitializer<C extends Channel> extends FixChannelInitializer<C> {
 
     private final FixAuthenticator authenticator;
+
     private final SessionRepository sessionRepository;
 
-    public FixAcceptorChannelInitializer(EventLoopGroup workerGroup,
-                                         FixApplication fixApplication,
-                                         FixAuthenticator authenticator,
-                                         SessionRepository sessionRepository) {
+    public FixAcceptorChannelInitializer(EventLoopGroup workerGroup, FixApplication fixApplication, FixAuthenticator authenticator, SessionRepository sessionRepository) {
         super(workerGroup, fixApplication);
         this.authenticator = authenticator;
         this.sessionRepository = sessionRepository;
@@ -41,9 +38,6 @@ public class FixAcceptorChannelInitializer<C extends Channel> extends FixChannel
 
     @Override
     protected MessageToMessageCodec<FixMessage, FixMessageBuilder> createSessionHandler() {
-        return new ServerSessionHandler(getFixApplication(), authenticator, sessionRepository);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }
-
-

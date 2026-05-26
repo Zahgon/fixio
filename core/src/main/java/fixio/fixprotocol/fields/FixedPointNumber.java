@@ -40,7 +40,7 @@ public class FixedPointNumber extends Number {
         int index = offset;
         long scaled = 0;
         int sign = 1;
-        switch (bytes[offset]) {
+        switch(bytes[offset]) {
             case '-':
                 sign = -1;
                 index++;
@@ -65,7 +65,6 @@ public class FixedPointNumber extends Number {
             }
             index++;
         }
-
         scaledValue = scaled * sign;
         this.scale = scale;
     }
@@ -93,15 +92,12 @@ public class FixedPointNumber extends Number {
 
     @Override
     public int intValue() {
-        return (int) (longValue());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public long longValue() {
-        if (scale == 0) {
-            return scaledValue;
-        }
-        return scaledValue / ((long) Math.pow(10.0, scale));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
@@ -112,33 +108,25 @@ public class FixedPointNumber extends Number {
 
     @Override
     public double doubleValue() {
-        double factor = Math.pow(10.0, scale);
-        return scaledValue / factor;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public long getScaledValue() {
-        return scaledValue;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public byte getScale() {
-        return scale;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || !(o instanceof FixedPointNumber))
-            return false;
-        final FixedPointNumber that = (FixedPointNumber) o;
-        return scale == that.scale && scaledValue == that.scaledValue;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (scaledValue ^ (scaledValue >>> 32));
-        result = 31 * result + (int) scale;
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private String insertPointBefore(int idx) {
@@ -151,28 +139,6 @@ public class FixedPointNumber extends Number {
 
     @Override
     public String toString() {
-        if (scale == 0 || scaledValue == 0) {
-            return String.valueOf(scaledValue);
-        }
-        int factor = (int) Math.pow(10.0, scale);
-        long beforePoint = scaledValue / factor;
-
-        long afterPoint = Math.abs(scaledValue - beforePoint * factor);
-        if (beforePoint == 0 && scaledValue < 0) {
-            return "-0." + afterPoint;
-        } else {
-            String scaledStr = String.valueOf(scaledValue);
-            int idx = scaledStr.length() - scale;
-            String insertPoint;
-            if (idx <= 0) {
-                insertPoint = insertPointBefore(idx);
-                idx = 0;
-            } else {
-                insertPoint = ".";
-            }
-            return new StringBuilder(scaledStr)
-                    .insert(idx, insertPoint)
-                    .toString();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

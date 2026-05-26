@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.client;
 
 import fixio.events.LogonEvent;
@@ -31,21 +30,20 @@ import fixio.netty.pipeline.InMemorySessionRepository;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.PasswordAuthentication;
 import java.util.List;
 
 public class ClientSessionHandler extends AbstractSessionHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ClientSessionHandler.class);
+
     private final FixSessionSettingsProvider sessionSettingsProvider;
+
     private final MessageSequenceProvider messageSequenceProvider;
+
     private final AuthenticationProvider authenticationProvider;
 
-    protected ClientSessionHandler(FixSessionSettingsProvider settingsProvider,
-                                   AuthenticationProvider authenticationProvider,
-                                   MessageSequenceProvider messageSequenceProvider,
-                                   FixApplication fixApplication) {
+    protected ClientSessionHandler(FixSessionSettingsProvider settingsProvider, AuthenticationProvider authenticationProvider, MessageSequenceProvider messageSequenceProvider, FixApplication fixApplication) {
         super(fixApplication, FixClock.systemUTC(), new InMemorySessionRepository());
         this.authenticationProvider = authenticationProvider;
         assert (settingsProvider != null) : "FixSessionSettingsProvider is expected.";
@@ -75,70 +73,21 @@ public class ClientSessionHandler extends AbstractSessionHandler {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) throws Exception {
-        final FixMessageHeader header = msg.getHeader();
-        FixSession session = getSession(ctx);
-        if (MessageTypes.LOGON.equals(header.getMessageType())) {
-            if (session != null) {
-                int incomingMsgSeqNum = header.getMsgSeqNum();
-                if (!session.checkAndIncrementIncomingSeqNum(incomingMsgSeqNum)) {
-                    int expectedMsgSeqNum = session.getNextIncomingMessageSeqNum();
-                    if (incomingMsgSeqNum > expectedMsgSeqNum) {
-                        FixMessageBuilder resendRequest = new FixMessageBuilderImpl(MessageTypes.RESEND_REQUEST);
-                        resendRequest.add(FieldType.BeginSeqNo, expectedMsgSeqNum);
-                        resendRequest.add(FieldType.EndSeqNo, incomingMsgSeqNum - 1);
-                        prepareMessageToSend(ctx, session, resendRequest);
-                        ctx.writeAndFlush(resendRequest);
-                    } else {
-                        getLogger().warn("Message Sequence Too Low");
-                        ctx.channel().close();
-                        return;
-                    }
-                }
-                getLogger().info("Fix Session Established.");
-                LogonEvent logonEvent = new LogonEvent(session);
-                out.add(logonEvent);
-                return;
-            } else {
-                throw new IllegalStateException("Duplicate Logon Request. Session Already Established.");
-            }
-        }
-        super.decode(ctx, msg, out);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        getLogger().info("Connection established, starting Client FIX session.");
-
-        FixSession pendingSession = createSession(sessionSettingsProvider);
-        setSession(ctx, pendingSession);
-
-        FixMessageBuilder logonRequest = createLogonRequest(pendingSession, sessionSettingsProvider);
-        prepareMessageToSend(ctx, pendingSession, logonRequest);
-        getLogger().info("Sending Logon: {}", logonRequest);
-
-        ctx.writeAndFlush(logonRequest);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private FixSession createSession(FixSessionSettingsProvider settingsProvider) {
         String defaultApplVerID = settingsProvider.getDefaultApplVerID();
-        if (FixMessage.FIX_5_0.equalsIgnoreCase(settingsProvider.getBeginString()) &&
-                (defaultApplVerID == null || defaultApplVerID.trim().length() == 0)) {
+        if (FixMessage.FIX_5_0.equalsIgnoreCase(settingsProvider.getBeginString()) && (defaultApplVerID == null || defaultApplVerID.trim().length() == 0)) {
             defaultApplVerID = "7";
         }
         //
-        final FixSession session = FixSession.newBuilder()
-                .beginString(settingsProvider.getBeginString())
-                .senderCompID(settingsProvider.getSenderCompID())
-                .senderSubID(settingsProvider.getSenderSubID())
-                .senderLocationID(settingsProvider.getSenderLocationID())
-                .targetCompID(settingsProvider.getTargetCompID())
-                .targetSubID(settingsProvider.getTargetSubID())
-                .targetLocationID(settingsProvider.getTargetLocationID())
-                .timeStampPrecision(settingsProvider.getTimeStampPrecision())
-                .defaultApplVerID(defaultApplVerID)
-                .defaultApplExtID(settingsProvider.getDefaultApplExtID())
-                .build();
-
+        final FixSession session = FixSession.newBuilder().beginString(settingsProvider.getBeginString()).senderCompID(settingsProvider.getSenderCompID()).senderSubID(settingsProvider.getSenderSubID()).senderLocationID(settingsProvider.getSenderLocationID()).targetCompID(settingsProvider.getTargetCompID()).targetSubID(settingsProvider.getTargetSubID()).targetLocationID(settingsProvider.getTargetLocationID()).timeStampPrecision(settingsProvider.getTimeStampPrecision()).defaultApplVerID(defaultApplVerID).defaultApplExtID(settingsProvider.getDefaultApplExtID()).build();
         session.setNextOutgoingMessageSeqNum(messageSequenceProvider.getMsgOutSeqNum());
         session.setNextIncomingMessageSeqNum(settingsProvider.isResetMsgSeqNum() ? 1 : messageSequenceProvider.getMsgInSeqNum());
         return session;
@@ -146,6 +95,6 @@ public class ClientSessionHandler extends AbstractSessionHandler {
 
     @Override
     protected Logger getLogger() {
-        return LOGGER;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

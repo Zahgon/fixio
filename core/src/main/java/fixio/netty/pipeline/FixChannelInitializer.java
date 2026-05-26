@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline;
 
 import fixio.fixprotocol.FixMessage;
@@ -39,7 +38,9 @@ import io.netty.handler.logging.LoggingHandler;
 public abstract class FixChannelInitializer<C extends Channel> extends ChannelInitializer<C> {
 
     protected static final String TAG_DECODER_HANDLER_NAME = "tagDecoder";
+
     private static final FixMessageEncoder ENCODER = new FixMessageEncoder();
+
     private final EventLoopGroup workerGroup;
 
     private final FixApplication fixApplication;
@@ -53,22 +54,12 @@ public abstract class FixChannelInitializer<C extends Channel> extends ChannelIn
 
     @Override
     public void initChannel(C ch) throws Exception {
-        final ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast(TAG_DECODER_HANDLER_NAME, new DelimiterBasedFrameDecoder(1024, Unpooled.wrappedBuffer(new byte[]{1})));
-        pipeline.addLast("fixMessageDecoder", new FixMessageDecoder());
-        pipeline.addLast("fixMessageEncoder", ENCODER);
-        pipeline.addLast("logging", new LoggingHandler("fix", LogLevel.DEBUG));
-        pipeline.addLast("session", createSessionHandler()); // handle fix session
-        pipeline.addLast("testRequest", testRequestHandler); // process test requests
-        if (fixApplication != null) {
-            pipeline.addLast(workerGroup, "app", fixApplication); // process application events events
-        }
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     protected abstract MessageToMessageCodec<FixMessage, FixMessageBuilder> createSessionHandler();
 
     protected FixApplication getFixApplication() {
-        return fixApplication;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

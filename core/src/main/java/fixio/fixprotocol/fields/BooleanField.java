@@ -19,8 +19,9 @@ import java.util.Objects;
 
 public class BooleanField extends AbstractField<Boolean> {
 
-    private static final byte[] TRUE_BYTES = new byte[]{(byte) 'Y'};
-    private static final byte[] FALSE_BYTES = new byte[]{(byte) 'N'};
+    private static final byte[] TRUE_BYTES = new byte[] { (byte) 'Y' };
+
+    private static final byte[] FALSE_BYTES = new byte[] { (byte) 'N' };
 
     private final boolean value;
 
@@ -31,28 +32,25 @@ public class BooleanField extends AbstractField<Boolean> {
 
     @Override
     public Boolean getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        return (value) ? TRUE_BYTES : FALSE_BYTES;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean booleanValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BooleanField that = (BooleanField) o;
-        return value == that.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -13,13 +13,7 @@ public class Utils {
      * @see <a href="http://www.javacodegeeks.com/2010/11/java-best-practices-char-to-byte-and.html">Java Best Practices char to byte</a>
      */
     public static byte[] stringToBytesASCII(String str) {
-        char[] buffer = str.toCharArray();
-        final int length = buffer.length;
-        byte[] b = new byte[length];
-        for (int i = 0; i < length; i++) {
-            b[i] = (byte) buffer[i];
-        }
-        return b;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -30,12 +24,6 @@ public class Utils {
      * @see <a href="http://www.javacodegeeks.com/2010/11/java-best-practices-char-to-byte-and.html">Java Best Practices char to byte</a>
      */
     public static String bytesToStringASCII(byte[] bytes) {
-        final int length = bytes.length;
-        char[] buffer = new char[length];
-        for (int i = 0; i < length; i++) {
-            buffer[i] = (char) bytes[i];
-        }
-        return new String(buffer);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

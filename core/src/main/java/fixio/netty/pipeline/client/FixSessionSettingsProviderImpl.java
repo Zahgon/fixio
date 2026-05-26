@@ -24,16 +24,27 @@ package fixio.netty.pipeline.client;
 public class FixSessionSettingsProviderImpl implements FixSessionSettingsProvider {
 
     private final String beginString;
+
     private final String senderCompID;
+
     private final String senderSubID;
+
     private final String senderLocationID;
+
     private final String targetCompID;
+
     private final String targetSubID;
+
     private final String targetLocationID;
+
     private final boolean resetMsgSeqNum;
+
     private final int heartbeatIntervalSec;
+
     private final String timeStampPrecision;
+
     private final String defaultApplVerID;
+
     private final String defaultApplExtID;
 
     private FixSessionSettingsProviderImpl(Builder builder) {
@@ -52,164 +63,157 @@ public class FixSessionSettingsProviderImpl implements FixSessionSettingsProvide
     }
 
     public static Builder newBuilder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder newBuilder(FixSessionSettingsProviderImpl copy) {
-        Builder builder = new Builder();
-        builder.beginString = copy.beginString;
-        builder.senderCompID = copy.senderCompID;
-        builder.senderSubID = copy.senderSubID;
-        builder.targetCompID = copy.targetCompID;
-        builder.targetSubID = copy.targetSubID;
-        builder.resetMsgSeqNum = copy.resetMsgSeqNum;
-        return builder;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderCompID() {
-        return senderCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderSubID() {
-        return senderSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderLocationID() {
-        return senderLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetCompID() {
-        return targetCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetSubID() {
-        return targetSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetLocationID() {
-        return targetLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getBeginString() {
-        return beginString;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isResetMsgSeqNum() {
-        return resetMsgSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getHeartbeatInterval() {
-        return heartbeatIntervalSec;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTimeStampPrecision() {
-        return timeStampPrecision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getDefaultApplVerID() {
-        return defaultApplVerID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getDefaultApplExtID() {
-        return defaultApplExtID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getProperty(String key, String defaultValue) {
-        throw new UnsupportedOperationException("Get custom property operation not supported");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static final class Builder {
+
         private String beginString;
+
         private String senderCompID;
+
         private String senderSubID;
+
         private String senderLocationID;
+
         private String targetCompID;
+
         private String targetSubID;
+
         private String targetLocationID;
+
         private boolean resetMsgSeqNum;
+
         private int heartbeatInterval = 60;
+
         private String timeStampPrecision = "";
+
         private String defaultApplVerID;
+
         private String defaultApplExtID;
 
         private Builder() {
         }
 
         public Builder beginString(String val) {
-            beginString = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderCompID(String val) {
-            senderCompID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderSubID(String val) {
-            senderSubID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderLocationID(String val) {
-            senderLocationID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetCompID(String val) {
-            targetCompID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetSubID(String val) {
-            targetSubID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetLocationID(String val) {
-            targetLocationID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder resetMsgSeqNum(boolean val) {
-            resetMsgSeqNum = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder heartbeatInterval(int val) {
-            heartbeatInterval = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder timeStampPrecision(String val) {
-            timeStampPrecision = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder defaultApplVerID(String val) {
-            defaultApplVerID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder defaultApplExtID(String val) {
-            defaultApplExtID = val;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public FixSessionSettingsProviderImpl build() {
-            return new FixSessionSettingsProviderImpl(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

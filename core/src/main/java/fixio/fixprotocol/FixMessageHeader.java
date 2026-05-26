@@ -13,149 +13,136 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.fixprotocol;
 
 import fixio.fixprotocol.fields.DateTimeFormatterWrapper;
-
 import java.time.ZonedDateTime;
 import java.util.List;
 
 public class FixMessageHeader {
 
     private String beginString;
+
     private String messageType;
+
     private int msgSeqNum;
+
     private ZonedDateTime sendingTime;
+
     private String senderCompID;
+
     private String senderSubID;
+
     private String senderLocationID;
+
     private String targetCompID;
+
     private String targetSubID;
+
     private String targetLocationID;
+
     private List<FixMessageFragment> customFields;
+
     private DateTimeFormatterWrapper dateTimeFormatter = null;
 
     public String getBeginString() {
-        return beginString;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setBeginString(String beginString) {
-        this.beginString = beginString;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getMessageType() {
-        return messageType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMessageType(String messageType) {
-        this.messageType = messageType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderCompID() {
-        return senderCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSenderCompID(String senderCompID) {
-        this.senderCompID = senderCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderSubID() {
-        return senderSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSenderSubID(String senderSubID) {
-        this.senderSubID = senderSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderLocationID() {
-        return senderLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSenderLocationID(String senderLocationID) {
-        this.senderLocationID = senderLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetCompID() {
-        return targetCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTargetCompID(String targetCompID) {
-        this.targetCompID = targetCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetSubID() {
-        return targetSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTargetSubID(String targetSubID) {
-        this.targetSubID = targetSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetLocationID() {
-        return targetLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setTargetLocationID(String targetLocationID) {
-        this.targetLocationID = targetLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getMsgSeqNum() {
-        return msgSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMsgSeqNum(int msgSeqNum) {
-        this.msgSeqNum = msgSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ZonedDateTime getSendingTime() {
-        return sendingTime;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSendingTime(ZonedDateTime sendingTime) {
-        this.sendingTime = sendingTime;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<FixMessageFragment> getCustomFields() {
-        return customFields;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setCustomFields(List<FixMessageFragment> customFields) {
-        this.customFields = customFields;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public DateTimeFormatterWrapper getDateTimeFormatter() {
-        return dateTimeFormatter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDateTimeFormatter(DateTimeFormatterWrapper dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("beginString='").append(beginString).append('\'');
-        sb.append(", messageType='").append(messageType).append('\'');
-        sb.append(", senderCompID='").append(senderCompID).append('\'');
-        sb.append(", targetCompID='").append(targetCompID).append('\'');
-        sb.append(", msgSeqNum=").append(msgSeqNum);
-        if (senderSubID != null) {
-            sb.append(", senderSubID='").append(senderSubID).append('\'');
-        }
-        if (senderLocationID != null) {
-            sb.append(", senderLocationID='").append(senderLocationID).append('\'');
-        }
-        if (targetSubID != null) {
-            sb.append(", targetSubID='").append(targetSubID).append('\'');
-        }
-        if (targetLocationID != null) {
-            sb.append(", targetLocationID='").append(targetLocationID).append('\'');
-        }
-        if (customFields != null) {
-            sb.append(customFields);
-        }
-        sb.append('}');
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

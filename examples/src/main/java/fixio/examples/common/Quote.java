@@ -18,6 +18,7 @@ package fixio.examples.common;
 public class Quote {
 
     private final double bid;
+
     private final double offer;
 
     public Quote(double bid, double offer) {
@@ -26,10 +27,10 @@ public class Quote {
     }
 
     public double getBid() {
-        return bid;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public double getOffer() {
-        return offer;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -27,19 +27,16 @@ public abstract class AbstractAdminEvent implements AdminEvent {
     }
 
     public FixSession getSession() {
-        return session;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AbstractAdminEvent)) return false;
-        final AbstractAdminEvent that = (AbstractAdminEvent) o;
-        return session.equals(that.session);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return session.hashCode();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

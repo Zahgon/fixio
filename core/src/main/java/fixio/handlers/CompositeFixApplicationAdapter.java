@@ -23,7 +23,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +30,9 @@ import java.util.List;
 public class CompositeFixApplicationAdapter extends FixApplicationAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompositeFixApplicationAdapter.class);
+
     private final List<FixMessageHandler> handlers;
+
     private final List<FixMessageValidator> validators;
 
     public CompositeFixApplicationAdapter(List<FixMessageValidator> validators, List<FixMessageHandler> handlers) {
@@ -43,36 +44,11 @@ public class CompositeFixApplicationAdapter extends FixApplicationAdapter {
 
     @Override
     public void onMessage(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) throws BusinessRejectException {
-        assert (msg != null) : "Message can't be null";
-        LOGGER.info("Received : {}", msg);
-
-        //Validate
-        for (FixMessageValidator validator : validators) {
-            validator.validate(ctx, msg);
-        }
-
-        //Business handler
-        if (handlers != null) {
-            boolean isHandled = false;
-            for (FixMessageHandler handler : handlers) {
-                try {
-                    if (handler.handle(ctx, msg)) {
-                        isHandled = true;
-                    }
-                } catch (Exception ex) {
-                    LOGGER.error("on {} ", handler.getClass(), ex);
-                }
-            }
-            if (!isHandled) {
-                LOGGER.warn("no handler for this message. {} ", msg);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void beforeSendMessage(ChannelHandlerContext ctx, FixMessageBuilder msg) {
-        for (FixMessageHandler handler : handlers) {
-            handler.beforeSendMessage(ctx, msg);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

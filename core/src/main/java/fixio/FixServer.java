@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio;
 
 import fixio.handlers.FixApplication;
@@ -31,22 +30,23 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.InetSocketAddress;
 
 public class FixServer extends AbstractFixConnector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FixServer.class);
+
     private final int port;
+
     private Channel channel;
+
     private EventLoopGroup bossGroup;
+
     private EventLoopGroup workerGroup;
+
     private FixAuthenticator authenticator;
 
-    public FixServer(int port,
-                     FixApplication fixApplication,
-                     FixAuthenticator authenticator,
-                     SessionRepository sessionRepository) {
+    public FixServer(int port, FixApplication fixApplication, FixAuthenticator authenticator, SessionRepository sessionRepository) {
         super(fixApplication, sessionRepository);
         assert (authenticator != null) : "Authenticator is required";
         this.authenticator = authenticator;
@@ -54,47 +54,10 @@ public class FixServer extends AbstractFixConnector {
     }
 
     public void start() throws InterruptedException {
-        bossGroup = new NioEventLoopGroup();
-        workerGroup = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
-        final ServerBootstrap bootstrap = new ServerBootstrap();
-        final FixAcceptorChannelInitializer<SocketChannel> channelInitializer = new FixAcceptorChannelInitializer<>(
-                workerGroup,
-                getFixApplication(),
-                authenticator,
-                getSessionRepository()
-        );
-
-
-        bootstrap.group(bossGroup, workerGroup)
-                .channel(NioServerSocketChannel.class)
-                .childOption(ChannelOption.TCP_NODELAY,
-                        Boolean.parseBoolean(System.getProperty(
-                                "nfs.rpc.tcp.nodelay", "true")))
-                .childOption(ChannelOption.ALLOCATOR, new PooledByteBufAllocator())
-                .localAddress(new InetSocketAddress(port))
-                .childHandler(channelInitializer)
-                .validate();
-
-        ChannelFuture f = bootstrap.bind().sync();
-        LOGGER.info("FixServer is started at {}", f.channel().localAddress());
-        channel = f.channel();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void stop() {
-        if (channel == null) {
-            throw new IllegalStateException("Server is not started.");
-        }
-        LOGGER.info("Stopping FixServer");
-        try {
-            channel.close().sync();
-            channel = null;
-        } catch (InterruptedException e) {
-            LOGGER.error("Error while stopping server", e);
-        } finally {
-            bossGroup.shutdownGracefully();
-            bossGroup = null;
-            workerGroup.shutdownGracefully();
-            workerGroup = null;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -26,7 +26,6 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 @ChannelHandler.Sharable
@@ -36,17 +35,7 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
 
     @Override
     protected void decode(ChannelHandlerContext ctx, Object msg, List<Object> out) throws Exception {
-        try {
-            if (msg instanceof FixMessage message) {
-                onMessage(ctx, message, out);
-            } else if (msg instanceof LogonEvent event) {
-                onLogon(ctx, event);
-            } else if (msg instanceof LogoutEvent event) {
-                onLogout(ctx, event);
-            }
-        } finally {
-            ReferenceCountUtil.release(msg);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -54,6 +43,7 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
      */
     @Override
     public void onLogon(ChannelHandlerContext ctx, LogonEvent msg) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,6 +51,7 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
      */
     @Override
     public void onLogout(ChannelHandlerContext ctx, LogoutEvent msg) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -68,6 +59,7 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
      */
     @Override
     public void onMessage(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) throws BusinessRejectException, InterruptedException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,6 +67,7 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
      */
     @Override
     public void beforeSendMessage(ChannelHandlerContext ctx, FixMessageBuilder msg) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,7 +75,6 @@ public class FixApplicationAdapter extends MessageToMessageDecoder<Object> imple
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        LOGGER.error("Uncaught application exception.", cause);
-        ctx.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

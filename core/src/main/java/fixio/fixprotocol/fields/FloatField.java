@@ -16,7 +16,6 @@
 package fixio.fixprotocol.fields;
 
 import java.util.Objects;
-
 import static java.nio.charset.StandardCharsets.US_ASCII;
 
 public class FloatField extends AbstractField<FixedPointNumber> {
@@ -35,29 +34,25 @@ public class FloatField extends AbstractField<FixedPointNumber> {
 
     @Override
     public FixedPointNumber getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        String s = value.toString();
-        return s.getBytes(US_ASCII);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public float floatValue() {
-        return value.floatValue();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FloatField that = (FloatField) o;
-        return Objects.equals(value, that.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

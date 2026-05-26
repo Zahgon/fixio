@@ -18,7 +18,6 @@ package fixio.fixprotocol.fields;
 import java.text.ParseException;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-
 import static fixio.fixprotocol.FixConst.DATE_TIME_FORMATTER_MICROS;
 import static fixio.fixprotocol.FixConst.DATE_TIME_FORMATTER_MILLIS;
 import static fixio.fixprotocol.FixConst.DATE_TIME_FORMATTER_NANOS;
@@ -32,12 +31,11 @@ import static fixio.fixprotocol.FixConst.DATE_TIME_PATTERN_PICOS_LENGTH;
 import static fixio.fixprotocol.FixConst.DATE_TIME_PATTERN_SECONDS_LENGTH;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 
-
 public class UTCTimestampField extends AbstractField<ZonedDateTime> {
 
     private final ZonedDateTime value;
-    private final int valueLen;
 
+    private final int valueLen;
 
     public UTCTimestampField(int tagNum, byte[] bytes, int offset, int length) throws ParseException {
         super(tagNum);
@@ -58,93 +56,34 @@ public class UTCTimestampField extends AbstractField<ZonedDateTime> {
     }
 
     public static ZonedDateTime parse(byte[] bytes) throws ParseException {
-        return parse(new String(bytes, US_ASCII));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static ZonedDateTime parse(byte[] bytes, int offset, int length) throws ParseException {
-        return parse(new String(bytes, offset, length, US_ASCII));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static ZonedDateTime parse(String timestampString) throws ParseException {
-        if (timestampString != null) {
-            int len = timestampString.length();
-            // most likely scenario
-            switch (len) {
-                case 17:
-                    return DATE_TIME_FORMATTER_SECONDS.parseZonedDateTime(timestampString);
-                case 21:
-                    return DATE_TIME_FORMATTER_MILLIS.parseZonedDateTime(timestampString);
-                case 24:
-                    return DATE_TIME_FORMATTER_MICROS.parseZonedDateTime(timestampString);
-                case 27:
-                    return DATE_TIME_FORMATTER_NANOS.parseZonedDateTime(timestampString);
-                case 30:
-                    return DATE_TIME_FORMATTER_PICOS.parseZonedDateTime(timestampString);
-                default:
-                    // try to guess
-                    if (len > DATE_TIME_PATTERN_PICOS_LENGTH) {
-                        return DATE_TIME_FORMATTER_PICOS.parseZonedDateTime(timestampString.substring(0, DATE_TIME_PATTERN_PICOS_LENGTH));
-                    } else if (len > DATE_TIME_PATTERN_NANOS_LENGTH) {
-                        return DATE_TIME_FORMATTER_NANOS.parseZonedDateTime(timestampString.substring(0, DATE_TIME_PATTERN_NANOS_LENGTH));
-                    } else if (len > DATE_TIME_PATTERN_MICROS_LENGTH) {
-                        return DATE_TIME_FORMATTER_MICROS.parseZonedDateTime(timestampString.substring(0, DATE_TIME_PATTERN_MICROS_LENGTH));
-                    } else if (len > DATE_TIME_PATTERN_MILLIS_LENGTH) {
-                        return DATE_TIME_FORMATTER_MILLIS.parseZonedDateTime(timestampString.substring(0, DATE_TIME_PATTERN_MILLIS_LENGTH));
-                    } else {
-                        return DATE_TIME_FORMATTER_SECONDS.parseZonedDateTime(timestampString.substring(0, DATE_TIME_PATTERN_SECONDS_LENGTH));
-                    }
-            }
-
-        }
-        throw new ParseException("Timestamp is null", -1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public ZonedDateTime getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        // most likely scenario
-        switch (valueLen) {
-            case 17:
-                return DATE_TIME_FORMATTER_SECONDS.format(value).getBytes(US_ASCII);
-            case 21:
-                return DATE_TIME_FORMATTER_MILLIS.format(value).getBytes(US_ASCII);
-            case 24:
-                return DATE_TIME_FORMATTER_MICROS.format(value).getBytes(US_ASCII);
-            case 27:
-                return DATE_TIME_FORMATTER_NANOS.format(value).getBytes(US_ASCII);
-            case 30:
-                return DATE_TIME_FORMATTER_PICOS.format(value).getBytes(US_ASCII);
-            default:
-                // try to guess
-                if (valueLen > DATE_TIME_PATTERN_PICOS_LENGTH) {
-                    return DATE_TIME_FORMATTER_PICOS.format(value).getBytes(US_ASCII);
-                } else if (valueLen > DATE_TIME_PATTERN_NANOS_LENGTH) {
-                    return DATE_TIME_FORMATTER_NANOS.format(value).getBytes(US_ASCII);
-                } else if (valueLen > DATE_TIME_PATTERN_MICROS_LENGTH) {
-                    return DATE_TIME_FORMATTER_MICROS.format(value).getBytes(US_ASCII);
-                } else if (valueLen > DATE_TIME_PATTERN_MILLIS_LENGTH) {
-                    return DATE_TIME_FORMATTER_MILLIS.format(value).getBytes(US_ASCII);
-                } else {
-                    return DATE_TIME_FORMATTER_SECONDS.format(value).getBytes(US_ASCII);
-                }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UTCTimestampField that = (UTCTimestampField) o;
-        return valueLen == that.valueLen &&
-                Objects.equals(value, that.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, valueLen);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

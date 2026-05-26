@@ -27,45 +27,30 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 class PriceReadingApp extends FixApplicationAdapter {
 
     public static final int MAX_QUOTE_COUNT = 300_000;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(PriceReadingApp.class);
+
     private int counter;
+
     private long startTimeNanos;
+
     private boolean finished;
+
     private String quoteRequestId;
 
     @Override
     public void onLogon(ChannelHandlerContext ctx, LogonEvent msg) {
-        counter = 0;
-        ctx.writeAndFlush(createQuoteRequest());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void onMessage(ChannelHandlerContext ctx, FixMessage msg, List<Object> out) {
-        assert (msg != null) : "Message can't be null";
-        switch (msg.getMessageType()) {
-            case MessageTypes.QUOTE:
-                onQuote(msg);
-                break;
-            default:
-                return;
-        }
-        if (counter % 10000 == 0) {
-            LOGGER.debug("Read {} Quotes", counter);
-        }
-        if (counter > MAX_QUOTE_COUNT && !finished) {
-            finished = true;
-
-            long timeMillis = (System.nanoTime() - startTimeNanos) / 1000000;
-            LOGGER.info("Read {} Quotes in {} ms, ~{} Quotes/sec", counter, timeMillis, counter * 1000.0 / timeMillis);
-
-            ctx.writeAndFlush(createQuoteCancel()).addListener(ChannelFutureListener.CLOSE);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void onQuote(FixMessage quote) {
@@ -78,8 +63,10 @@ class PriceReadingApp extends FixApplicationAdapter {
 
     private FixMessageBuilder createQuoteCancel() {
         FixMessageBuilder quoteCancel = new FixMessageBuilderImpl(MessageTypes.QUOTE_CANCEL);
-        quoteCancel.add(FieldType.QuoteID, "*"); //QuoteCancelType=CANCEL_ALL_QUOTES
-        quoteCancel.add(FieldType.QuoteCancelType, "4"); //QuoteCancelType=CANCEL_ALL_QUOTES
+        //QuoteCancelType=CANCEL_ALL_QUOTES
+        quoteCancel.add(FieldType.QuoteID, "*");
+        //QuoteCancelType=CANCEL_ALL_QUOTES
+        quoteCancel.add(FieldType.QuoteCancelType, "4");
         quoteCancel.add(FieldType.QuoteReqID, quoteRequestId);
         return quoteCancel;
     }
@@ -90,17 +77,14 @@ class PriceReadingApp extends FixApplicationAdapter {
         quoteRequest.add(FieldType.QuoteReqID, quoteRequestId);
         String clientReqId = quoteRequestId + counter;
         quoteRequest.add(FieldType.ClOrdID, clientReqId);
-
         Group instrument1 = quoteRequest.newGroup(FieldType.NoRelatedSym, 2);
         instrument1.add(FieldType.Symbol, "EUR/USD");
         instrument1.add(FieldType.SecurityType, "FOR");
-
         Group instrument2 = quoteRequest.newGroup(FieldType.NoRelatedSym, 2);
         instrument2.add(FieldType.Symbol, "EUR/CHF");
         instrument2.add(FieldType.SecurityType, "FOR");
-
-        quoteRequest.add(FieldType.QuoteRequestType, 2); //QuoteRequestType=AUTOMATIC
+        //QuoteRequestType=AUTOMATIC
+        quoteRequest.add(FieldType.QuoteRequestType, 2);
         return quoteRequest;
     }
-
 }

@@ -50,18 +50,18 @@ public class BusinessRejectException extends Exception {
     }
 
     public int getRefSeqNum() {
-        return refSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getRefMsgType() {
-        return refMsgType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getBusinessRejectReason() {
-        return businessRejectReason;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getText() {
-        return text;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

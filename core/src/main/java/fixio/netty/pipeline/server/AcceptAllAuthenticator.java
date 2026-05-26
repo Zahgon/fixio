@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.server;
 
 import fixio.fixprotocol.FixMessage;
@@ -26,9 +25,6 @@ public class AcceptAllAuthenticator implements FixAuthenticator {
 
     @Override
     public boolean authenticate(FixMessage logonMessage) {
-        LOGGER.info("Received Auth Request: {}", logonMessage);
-
-        LOGGER.info("Authentication Successful.");
-        return true;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

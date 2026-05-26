@@ -16,7 +16,6 @@
 package fixio.fixprotocol.fields;
 
 import fixio.Utils;
-
 import java.util.Arrays;
 
 public class StringField extends AbstractField<String> {
@@ -41,24 +40,21 @@ public class StringField extends AbstractField<String> {
 
     @Override
     public String getValue() {
-        return Utils.bytesToStringASCII(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StringField that = (StringField) o;
-        return Arrays.equals(value, that.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

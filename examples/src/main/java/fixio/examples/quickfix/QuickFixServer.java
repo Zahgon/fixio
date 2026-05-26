@@ -28,14 +28,16 @@ import quickfix.MessageStoreFactory;
 import quickfix.SLF4JLogFactory;
 import quickfix.SessionSettings;
 import quickfix.SocketAcceptor;
-
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class QuickFixServer {
 
     private final ArrayBlockingQueue<Quote> quoteQueue = new ArrayBlockingQueue<>(8192);
+
     private Thread generator;
+
     private QuoteGeneratorTask generatorTask;
+
     private Acceptor acceptor;
 
     public QuickFixServer() throws ConfigError {
@@ -43,27 +45,19 @@ public class QuickFixServer {
         MessageStoreFactory storeFactory = new MemoryStoreFactory();
         LogFactory logFactory = new SLF4JLogFactory(settings);
         MessageFactory messageFactory = new DefaultMessageFactory();
-
         Application application = new QuickFixStreamingApp(quoteQueue);
-
         acceptor = new SocketAcceptor(application, storeFactory, settings, logFactory, messageFactory);
     }
 
     public void start() throws ConfigError {
-        generatorTask = new QuoteGeneratorTask(quoteQueue);
-        generator = new Thread(generatorTask, "QuoteGenerator");
-        acceptor.start();
-        generator.start();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void stop() throws InterruptedException {
-        generatorTask.stop();
-        acceptor.stop();
-        generator.join();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static void main(String[] args) throws ConfigError {
-        QuickFixServer quickFixServer = new QuickFixServer();
-        quickFixServer.start();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

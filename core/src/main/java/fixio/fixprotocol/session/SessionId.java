@@ -18,16 +18,20 @@ package fixio.fixprotocol.session;
 public class SessionId {
 
     private final String senderCompID;
+
     private final String targetCompID;
+
     private final String senderSubID;
+
     private final String targetSubID;
+
     private final String senderLocationID;
+
     private final String targetLocationID;
+
     private final int hash;
 
-    public SessionId(String senderCompID, String targetCompID,
-                     String senderSubID, String targetSubID,
-                     String senderLocationID, String targetLocationID) {
+    public SessionId(String senderCompID, String targetCompID, String senderSubID, String targetSubID, String senderLocationID, String targetLocationID) {
         assert (senderCompID != null) : "SenderCompID is required.";
         assert (targetCompID != null) : "TargetCompID is required.";
         this.senderCompID = senderCompID;
@@ -45,46 +49,37 @@ public class SessionId {
     }
 
     public String getSenderCompID() {
-        return senderCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderSubID() {
-        return senderSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetCompID() {
-        return targetCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetSubID() {
-        return targetSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderLocationID() {
-        return senderLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetLocationID() {
-        return targetLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SessionId other = (SessionId) o;
-        return this.hashCode() == other.hashCode() &&
-                idEquals(senderCompID, other.senderCompID) &&
-                idEquals(senderSubID, other.senderSubID) &&
-                idEquals(senderLocationID, other.senderLocationID) &&
-                idEquals(targetCompID, other.targetCompID) &&
-                idEquals(targetSubID, other.targetSubID) &&
-                idEquals(targetLocationID, other.targetLocationID);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return hash;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private int calculateHash() {

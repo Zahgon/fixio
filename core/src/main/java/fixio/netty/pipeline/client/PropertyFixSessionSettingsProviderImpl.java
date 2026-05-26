@@ -13,13 +13,11 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.pipeline.client;
 
 import fixio.fixprotocol.FixConst;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -27,6 +25,7 @@ import java.util.Properties;
 public class PropertyFixSessionSettingsProviderImpl implements FixSessionSettingsProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyFixSessionSettingsProviderImpl.class);
+
     private final Properties properties;
 
     public PropertyFixSessionSettingsProviderImpl(Properties properties) {
@@ -39,7 +38,7 @@ public class PropertyFixSessionSettingsProviderImpl implements FixSessionSetting
     }
 
     public Properties getProperties() {
-        return properties;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void loadProperties(String resource) {
@@ -59,66 +58,66 @@ public class PropertyFixSessionSettingsProviderImpl implements FixSessionSetting
 
     @Override
     public boolean isResetMsgSeqNum() {
-        return Boolean.parseBoolean(properties.getProperty("ResetOnLogon", "true"));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getHeartbeatInterval() {
-        return Integer.parseInt(properties.getProperty("HeartBtInt", "60"));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public String getTimeStampPrecision() {// "SECONDS", "MILLIS", "MICROS", "NANOS". Default is "MILLIS"
-        return properties.getProperty("TimeStampPrecision", FixConst.TimeStampPrecision.MILLIS.toString()).trim();
+    public String getTimeStampPrecision() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getDefaultApplVerID() {
-        return properties.getProperty("DefaultApplVerID", null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getDefaultApplExtID() {
-        return properties.getProperty("DefaultApplExtID", null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderCompID() {
-        return properties.getProperty("SenderCompID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderSubID() {
-        return properties.getProperty("SenderSubID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getSenderLocationID() {
-        return properties.getProperty("SenderLocationID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetCompID() {
-        return properties.getProperty("TargetCompID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetSubID() {
-        return properties.getProperty("TargetSubID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getTargetLocationID() {
-        return properties.getProperty("TargetLocationID", "").trim();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getBeginString() {
-        return properties.getProperty("BeginString");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getProperty(String key, String defaultValue) {
-        return properties.getProperty(key, defaultValue);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

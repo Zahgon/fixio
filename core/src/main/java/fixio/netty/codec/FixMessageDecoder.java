@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.codec;
 
 import fixio.fixprotocol.FieldType;
@@ -22,7 +21,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.MessageToMessageDecoder;
-
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -49,70 +47,22 @@ import java.util.List;
 public class FixMessageDecoder extends MessageToMessageDecoder<ByteBuf> {
 
     private FixMessageImpl message;
+
     private int checksum;
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        reset();
-        super.channelInactive(ctx);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        reset();
-        super.exceptionCaught(ctx, cause);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
-        assert (in != null) : "No Buffer";
-
-        int arrayIndex = 0;
-        int tagNum = 0;
-        byte[] bytes = new byte[in.readableBytes()];
-        in.readBytes(bytes);
-        int length = bytes.length;
-        for (; arrayIndex < length; arrayIndex++) {
-            byte b = bytes[arrayIndex];
-            if (b == '=') {
-                break;
-            }
-            tagNum = tagNum * 10 + (b - '0');
-        }
-        int offset = arrayIndex + 1;
-        int valueLength = length - arrayIndex - 1;
-
-        int sumBytes = 0;
-        if (tagNum != 10) {
-            for (byte b : bytes) {
-                sumBytes += b;
-            }
-            sumBytes += 1; // SOH value
-        }
-        switch (tagNum) {
-            case 8: // begin string
-                if (message != null) {
-                    throw new DecoderException("Unexpected BeginString(8)");
-                }
-                message = new FixMessageImpl();
-                checksum = sumBytes;
-                message.add(tagNum, bytes, offset, valueLength);
-                break;
-            case 10: // checksum
-                appendField(tagNum, bytes, offset, valueLength);
-                verifyChecksum(message.getChecksum());
-                out.add(message);
-                message = null;
-                checksum = 0;
-                break;
-            default:
-                if (tagNum > 0) {
-                    appendField(tagNum, bytes, offset, valueLength);
-                    checksum += sumBytes;
-                } else {
-                    throw new DecoderException("Tag num must be positive but got " + tagNum);
-                }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void appendField(int tag, byte[] value, int offset, int valueLength) {
@@ -121,15 +71,12 @@ public class FixMessageDecoder extends MessageToMessageDecoder<ByteBuf> {
             if (valueLength > 10) {
                 strValue += "...";
             }
-            throw new DecoderException("BeginString tag expected, but got: "
-                    + tag + "=" + strValue);
+            throw new DecoderException("BeginString tag expected, but got: " + tag + "=" + strValue);
         }
-
         FieldType type = FieldType.forTag(tag);
         if (type == null) {
             throw new DecoderException("Unknown tag: " + tag);
         }
-
         message.add(tag, value, offset, valueLength);
     }
 

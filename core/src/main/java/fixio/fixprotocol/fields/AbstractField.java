@@ -15,7 +15,6 @@
  */
 package fixio.fixprotocol.fields;
 
-
 import fixio.fixprotocol.FieldType;
 import fixio.fixprotocol.FixMessageFragment;
 
@@ -29,7 +28,7 @@ public abstract class AbstractField<T> implements FixMessageFragment<T> {
 
     @Override
     public int getTagNum() {
-        return tagNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -41,7 +40,6 @@ public abstract class AbstractField<T> implements FixMessageFragment<T> {
 
     @Override
     public String toString() {
-        int tagNum = getTagNum();
-        return FieldType.forTag(tagNum) + "(" + tagNum + ")=" + getValue();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

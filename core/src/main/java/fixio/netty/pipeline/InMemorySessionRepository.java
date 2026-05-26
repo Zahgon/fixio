@@ -18,7 +18,6 @@ package fixio.netty.pipeline;
 import fixio.fixprotocol.FixMessageHeader;
 import fixio.fixprotocol.session.FixSession;
 import fixio.fixprotocol.session.SessionId;
-
 import java.util.concurrent.ConcurrentHashMap;
 
 public class InMemorySessionRepository implements SessionRepository {
@@ -26,36 +25,12 @@ public class InMemorySessionRepository implements SessionRepository {
     private final ConcurrentHashMap<SessionId, FixSession> sessions = new ConcurrentHashMap<>();
 
     private static SessionId createSessionId(FixMessageHeader header) {
-        return new SessionId(
-                header.getSenderCompID(),
-                header.getTargetCompID(),
-                header.getSenderSubID(),
-                header.getTargetSubID(),
-                header.getSenderLocationID(),
-                header.getTargetLocationID()
-        );
+        return new SessionId(header.getSenderCompID(), header.getTargetCompID(), header.getSenderSubID(), header.getTargetSubID(), header.getSenderLocationID(), header.getTargetLocationID());
     }
 
     @Override
     public FixSession getOrCreateSession(FixMessageHeader header) {
-        SessionId id = createSessionId(header);
-
-        FixSession newSession = FixSession.newBuilder()
-                .beginString(header.getBeginString())
-                .senderCompID(header.getSenderCompID())
-                .senderSubID(header.getSenderSubID())
-                .senderLocationID(header.getSenderLocationID())
-                .targetCompID(header.getTargetCompID())
-                .targetSubID(header.getTargetSubID())
-                .targetLocationID(header.getTargetLocationID())
-                .build();
-
-        newSession.setNextIncomingMessageSeqNum(1);
-        newSession.setNextOutgoingMessageSeqNum(1);
-
-        final FixSession existingSession = sessions.putIfAbsent(id, newSession);
-        return existingSession == null ? newSession : existingSession;
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,13 +41,11 @@ public class InMemorySessionRepository implements SessionRepository {
      */
     @Override
     public FixSession getSession(FixMessageHeader header) {
-        SessionId id = createSessionId(header);
-
-        return sessions.get(id);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void removeSession(SessionId sessionId) {
-        sessions.remove(sessionId);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

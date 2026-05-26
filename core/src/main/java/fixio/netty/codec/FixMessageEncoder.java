@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.netty.codec;
 
 import fixio.fixprotocol.FixConst;
@@ -29,7 +28,6 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -69,27 +67,18 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
     }
 
     static int calculateChecksum(ByteBuf buf, int offset) {
-        int sum = 0;
-        for (int i = offset; i < buf.writerIndex(); i++) {
-            sum += buf.getByte(i);
-        }
-        return sum % 256;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static void encodeHeader(FixMessageHeader header, ByteBuf out) {
-
         // message type
         writeField(35, header.getMessageType(), out);
-
         // SenderCompID
         writeField(49, header.getSenderCompID(), out);
-
         // TargetCompID
         writeField(56, header.getTargetCompID(), out);
-
         // MsgSeqNum
         writeField(34, Integer.toString(header.getMsgSeqNum()), out);
-
         // SenderSubID
         if (header.getSenderSubID() != null && !"".equals(header.getSenderSubID())) {
             writeField(50, header.getSenderSubID(), out);
@@ -98,7 +87,6 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
         if (header.getSenderLocationID() != null && !"".equals(header.getSenderLocationID())) {
             writeField(142, header.getSenderLocationID(), out);
         }
-
         // TargetSubID
         if (header.getTargetSubID() != null && !"".equals(header.getTargetSubID())) {
             writeField(57, header.getTargetSubID(), out);
@@ -107,12 +95,10 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
         if (header.getTargetLocationID() != null && !"".equals(header.getTargetLocationID())) {
             writeField(143, header.getTargetLocationID(), out);
         }
-
         // SendingTime
         DateTimeFormatterWrapper formatter = (header.getDateTimeFormatter() != null) ? header.getDateTimeFormatter() : FixConst.DATE_TIME_FORMATTER_MILLIS;
         String timeStr = formatter.format(header.getSendingTime());
         writeField(52, timeStr, out);
-
         // customize tag
         List<FixMessageFragment> customFields = header.getCustomFields();
         if (customFields != null) {
@@ -122,12 +108,8 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
         }
     }
 
-    private static int fillBodyBuf(final ByteBuf payloadBuf,
-                                   FixMessageBuilder msg,
-                                   FixMessageHeader header) {
-
+    private static int fillBodyBuf(final ByteBuf payloadBuf, FixMessageBuilder msg, FixMessageHeader header) {
         encodeHeader(header, payloadBuf);
-
         // message body
         for (FixMessageFragment component : msg.getBody()) {
             encodeMessageFragment(payloadBuf, component);
@@ -135,8 +117,7 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
         return payloadBuf.writerIndex();
     }
 
-    private static void encodeMessageFragment(ByteBuf payloadBuf,
-                                              FixMessageFragment messageFragment) {
+    private static void encodeMessageFragment(ByteBuf payloadBuf, FixMessageFragment messageFragment) {
         if (messageFragment instanceof AbstractField field) {
             writeField(messageFragment.getTagNum(), field, payloadBuf);
         } else if (messageFragment instanceof GroupField groupField) {
@@ -151,52 +132,11 @@ public class FixMessageEncoder extends MessageToByteEncoder<FixMessageBuilder> {
     }
 
     static void writeChecksumField(ByteBuf out, int value) {
-        int x2 = value / 100;
-        int x1 = (value - x2 * 100) / 10;
-        int x0 = value - x2 * 100 - x1 * 10;
-        out.ensureWritable(7);
-        out.writeByte('1');
-        out.writeByte('0');
-        out.writeByte('=');
-        out.writeByte('0' + x2);
-        out.writeByte('0' + x1);
-        out.writeByte('0' + x0);
-        out.writeByte((byte) 1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void encode(ChannelHandlerContext ctx,
-                       FixMessageBuilder msg,
-                       ByteBuf out) {
-        final FixMessageHeader header = msg.getHeader();
-        validateRequiredFields(header);
-
-        final int initialOffset = out.writerIndex();
-
-        final ByteBufAllocator byteBufAllocator = ctx.alloc();
-
-        final ByteBuf bodyBuf = byteBufAllocator.buffer();
-        final ByteBuf headBuf = byteBufAllocator.buffer();
-
-        int bodyLength = fillBodyBuf(bodyBuf, msg, header);
-
-        // begin string
-        writeField(8, header.getBeginString(), headBuf);
-        // body length
-        writeField(9, Integer.toString(bodyLength), headBuf);
-
-        out.writeBytes(headBuf);
-        out.writeBytes(bodyBuf);
-
-        int checksum = calculateChecksum(out, initialOffset);
-
-        // Checksum
-        writeChecksumField(out, checksum);
-        ctx.flush();
-
-        headBuf.release();
-        bodyBuf.release();
-        assert (headBuf.refCnt() == 0);
-        assert (bodyBuf.refCnt() == 0);
+    public void encode(ChannelHandlerContext ctx, FixMessageBuilder msg, ByteBuf out) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

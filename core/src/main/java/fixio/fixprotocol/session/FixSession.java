@@ -13,17 +13,14 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.fixprotocol.session;
 
 import fixio.fixprotocol.FixConst;
 import fixio.fixprotocol.FixMessageBuilder;
 import fixio.fixprotocol.FixMessageHeader;
 import fixio.fixprotocol.fields.DateTimeFormatterWrapper;
-
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
-
 import static fixio.fixprotocol.FixConst.TimeStampPrecision.MICROS;
 import static fixio.fixprotocol.FixConst.TimeStampPrecision.MILLIS;
 import static fixio.fixprotocol.FixConst.TimeStampPrecision.NANOS;
@@ -32,21 +29,32 @@ import static fixio.fixprotocol.FixConst.TimeStampPrecision.SECONDS;
 
 public class FixSession {
 
-    private static final AtomicIntegerFieldUpdater<FixSession> INCOMING_SEQ_NUM_UPDATER = AtomicIntegerFieldUpdater.newUpdater
-            (FixSession.class, "nextIncomingMessageSeqNum");
+    private static final AtomicIntegerFieldUpdater<FixSession> INCOMING_SEQ_NUM_UPDATER = AtomicIntegerFieldUpdater.newUpdater(FixSession.class, "nextIncomingMessageSeqNum");
 
     private final AtomicInteger nextOutgoingMessageSeqNum = new AtomicInteger();
+
     private final String beginString;
+
     private final String senderCompID;
+
     private final String senderSubID;
+
     private final String senderLocationID;
+
     private final String targetCompID;
+
     private final String targetLocationID;
+
     private final String targetSubID;
+
     private final String defaultApplVerID;
+
     private final String defaultApplExtID;
+
     private final SessionId sessionId;
+
     private volatile int nextIncomingMessageSeqNum;
+
     private DateTimeFormatterWrapper dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_MILLIS;
 
     private FixSession(Builder builder) {
@@ -59,206 +67,156 @@ public class FixSession {
         this.targetLocationID = builder.targetLocationID;
         this.defaultApplVerID = builder.defaultApplVerID;
         this.defaultApplExtID = builder.defaultApplExtID;
-
-        this.sessionId = new SessionId(
-                senderCompID,
-                targetCompID,
-                senderSubID,
-                targetSubID,
-                senderLocationID,
-                targetLocationID);
+        this.sessionId = new SessionId(senderCompID, targetCompID, senderSubID, targetSubID, senderLocationID, targetLocationID);
     }
 
     public static Builder newBuilder() {
-        return new Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getBeginString() {
-        return beginString;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderCompID() {
-        return senderCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderSubID() {
-        return senderSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSenderLocationID() {
-        return senderLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetCompID() {
-        return targetCompID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetSubID() {
-        return targetSubID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getTargetLocationID() {
-        return targetLocationID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getDefaultApplVerID() {
-        return defaultApplVerID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getDefaultApplExtID() {
-        return defaultApplExtID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNextOutgoingMessageSeqNum() {
-        return nextOutgoingMessageSeqNum.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setNextOutgoingMessageSeqNum(int nextOutgoingMessageSeqNum) {
-        this.nextOutgoingMessageSeqNum.set(nextOutgoingMessageSeqNum);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNextIncomingMessageSeqNum() {
-        return nextIncomingMessageSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setNextIncomingMessageSeqNum(int nextIncomingMessageSeqNum) {
-        this.nextIncomingMessageSeqNum = nextIncomingMessageSeqNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getNextOutgoingMsgSeqNum() {
-        return nextOutgoingMessageSeqNum.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean checkAndIncrementIncomingSeqNum(final int num) {
-        return INCOMING_SEQ_NUM_UPDATER.compareAndSet(this, num, num + 1);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public DateTimeFormatterWrapper getDateTimeFormatter() {
-        return dateTimeFormatter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDateTimeFormatter(DateTimeFormatterWrapper dateTimeFormatter) {
-        this.dateTimeFormatter = dateTimeFormatter;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void prepareOutgoing(FixMessageBuilder fixMessage) {
-        FixMessageHeader header = fixMessage.getHeader();
-
-        if (header.getBeginString() == null || "".equals(header.getBeginString())) {
-            header.setBeginString(beginString);
-        }
-        if (header.getMsgSeqNum() == 0) {
-            header.setMsgSeqNum(nextOutgoingMessageSeqNum.getAndIncrement());
-        }
-        //
-        if (header.getSenderCompID() == null || "".equals(header.getSenderCompID())) {
-            header.setSenderCompID(senderCompID);
-        }
-        if (header.getSenderSubID() == null || "".equals(header.getSenderSubID())) {
-            header.setSenderSubID(senderSubID);
-        }
-        if (header.getSenderLocationID() == null || "".equals(header.getSenderLocationID())) {
-            header.setSenderLocationID(senderLocationID);
-        }
-        //
-        if (header.getTargetCompID() == null || "".equals(header.getTargetCompID())) {
-            header.setTargetCompID(targetCompID);
-        }
-        if (header.getTargetSubID() == null || "".equals(header.getTargetSubID())) {
-            header.setTargetSubID(targetSubID);
-        }
-        if (header.getTargetLocationID() == null || "".equals(header.getTargetLocationID())) {
-            header.setTargetLocationID(targetLocationID);
-        }
-        //
-        if (header.getDateTimeFormatter() == null) {
-            header.setDateTimeFormatter(dateTimeFormatter);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public SessionId getId() {
-        return sessionId;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static class Builder {
 
         private String beginString;
+
         private String senderCompID;
+
         private String senderSubID;
+
         private String senderLocationID;
+
         private String targetCompID;
+
         private String targetSubID;
+
         private String targetLocationID;
+
         private String defaultApplVerID;
+
         private String defaultApplExtID;
+
         private DateTimeFormatterWrapper dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_MILLIS;
 
         private Builder() {
         }
 
         public Builder beginString(String beginString) {
-            this.beginString = beginString;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderCompID(String senderCompId) {
-            this.senderCompID = senderCompId;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderSubID(String senderSubId) {
-            this.senderSubID = senderSubId;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder senderLocationID(String senderLocationID) {
-            this.senderLocationID = senderLocationID;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetCompID(String targetCompId) {
-            this.targetCompID = targetCompId;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetSubID(String targetSubId) {
-            this.targetSubID = targetSubId;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder targetLocationID(String targetLocationID) {
-            this.targetLocationID = targetLocationID;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder defaultApplVerID(String defaultApplVerID) {
-            this.defaultApplVerID = defaultApplVerID;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder defaultApplExtID(String defaultApplExtID) {
-            this.defaultApplExtID = defaultApplExtID;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder timeStampPrecision(String timeStampPrecision) {
-            if (SECONDS.toString().equals(timeStampPrecision)) {
-                this.dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_SECONDS;
-            } else if (MILLIS.toString().equals(timeStampPrecision)) {
-                this.dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_MILLIS;
-            } else if (MICROS.toString().equals(timeStampPrecision)) {
-                this.dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_MICROS;
-            } else if (NANOS.toString().equals(timeStampPrecision)) {
-                this.dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_NANOS;
-            } else if (PICOS.toString().equals(timeStampPrecision)) {
-                this.dateTimeFormatter = FixConst.DATE_TIME_FORMATTER_PICOS;
-            }
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public FixSession build() {
-            return new FixSession(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 }

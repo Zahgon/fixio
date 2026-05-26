@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.fixprotocol;
 
 import fixio.fixprotocol.fields.AbstractField;
@@ -21,7 +20,6 @@ import fixio.fixprotocol.fields.CharField;
 import fixio.fixprotocol.fields.FieldFactory;
 import fixio.fixprotocol.fields.IntField;
 import fixio.fixprotocol.fields.StringField;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,164 +29,102 @@ import java.util.List;
 public class FixMessageImpl implements FixMessage {
 
     private final FixMessageHeader header = new FixMessageHeader();
+
     private final FixMessageTrailer trailer = new FixMessageTrailer();
+
     private final List<FixMessageFragment> body = new ArrayList<>();
 
     public FixMessageImpl add(int tagNum, byte[] value) {
-        return add(tagNum, value, 0, value.length);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public FixMessageImpl addBody(int tagNum, String value) {
-        body.add(new StringField(tagNum, value));
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public FixMessageImpl addBody(GroupField group) {
-        body.add(group);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public FixMessageImpl add(int tagNum, byte[] value, int offset, int length) {
-        assert (tagNum > 0) : "TagNum must be positive. Got " + tagNum;
-        assert (value != null) : "Value must be specified.";
-        AbstractField field = FieldFactory.valueOf(tagNum, value, offset, length);
-        FieldType fieldType = FieldType.forTag(tagNum);
-        switch (fieldType) {
-            case BeginString:
-                header.setBeginString(((StringField) field).getValue().intern());
-                break;
-            case CheckSum:
-                int checksum = (value[offset] - '0') * 100 + (value[offset + 1] - '0') * 10 + (value[offset + 2] - '0');
-                trailer.setCheckSum(checksum);
-                break;
-            case SenderCompID:
-                header.setSenderCompID(((StringField) field).getValue());
-                break;
-            case TargetCompID:
-                header.setTargetCompID(((StringField) field).getValue());
-                break;
-            case MsgSeqNum:
-                header.setMsgSeqNum(((IntField) field).intValue());
-                break;
-            case MsgType:
-                header.setMessageType(((StringField) field).getValue().intern());
-                break;
-            default:
-                body.add(field);
-                break;
-        }
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public List<FixMessageFragment> getBody() {
-        return body;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getString(int tagNum) {
-        FixMessageFragment item = getFirst(tagNum);
-        if (item == null) {
-            return null;
-        }
-        if (item instanceof StringField stringField) {
-            return stringField.getValue();
-        } else {
-            throw new IllegalArgumentException("Tag " + tagNum + " is not a Field.");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getValue(FieldType fieldType) {
-        return getValue(fieldType.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getValue(int tagNum) {
-        FixMessageFragment field = getFirst(tagNum);
-        if (field instanceof AbstractField) {
-            return (T) field.getValue();
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getString(FieldType field) {
-        return getString(field.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Character getChar(FieldType fieldType) {
-        return getChar(fieldType.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Character getChar(int tagNum) {
-        FixMessageFragment field = getFirst(tagNum);
-        if (field == null) {
-            return null;
-        }
-        if (field instanceof CharField charField) {
-            return charField.getValue();
-        } else {
-            throw new IllegalArgumentException("Tag " + tagNum + " is not a Field.");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Integer getInt(int tagNum) {
-        FixMessageFragment field = getFirst(tagNum);
-        if (field instanceof IntField intField) {
-            return intField.getValue();
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Integer getInt(FieldType field) {
-        return getInt(field.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public FixMessageHeader getHeader() {
-        return header;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getMsgSeqNum() {
-        return header.getMsgSeqNum();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String getMessageType() {
-        return header.getMessageType();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setMessageType(String messageType) {
-        header.setMessageType(messageType);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getChecksum() {
-        return trailer.getCheckSum();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<Group> getGroups(int tagNum) {
-        FixMessageFragment fragment = getFirst(tagNum);
-        if (fragment instanceof GroupField groupField) {
-            return groupField.getGroups();
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder(512);
-        final String sp = System.getProperty("line.separator");
-        sb.append(sp);
-        sb.append("header{").append(header).append("}").append(sp);
-        sb.append("body{").append(body).append("}").append(sp);
-        sb.append("trailer{").append(trailer).append('}').append(sp);
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

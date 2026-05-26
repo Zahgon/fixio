@@ -28,28 +28,25 @@ public class CharField extends AbstractField<Character> {
 
     @Override
     public Character getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        return new byte[]{(byte) value};
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public char charValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CharField charField = (CharField) o;
-        return value == charField.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

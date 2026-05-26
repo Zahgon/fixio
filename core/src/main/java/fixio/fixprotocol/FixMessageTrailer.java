@@ -13,49 +13,42 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-
 package fixio.fixprotocol;
 
 public class FixMessageTrailer {
 
     private int checkSum;
+
     private String signature;
+
     private int signatureLength;
 
     public int getCheckSum() {
-        return checkSum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setCheckSum(int checkSum) {
-        this.checkSum = checkSum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSignature() {
-        return signature;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSignature(String signature) {
-        this.signature = signature;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getSignatureLength() {
-        return signatureLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSignatureLength(int signatureLength) {
-        this.signatureLength = signatureLength;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        if (signature != null) {
-            sb.append("signature='").append(signature).append("', ");
-        }
-        if (signatureLength > 0) {
-            sb.append(" signatureLength=").append(signatureLength).append(", ");
-        }
-        sb.append("checkSum=").append(checkSum);
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

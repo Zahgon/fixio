@@ -17,7 +17,6 @@ package fixio.fixprotocol;
 
 import fixio.fixprotocol.fields.FixedPointNumber;
 import fixio.fixprotocol.fields.StringField;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,7 @@ import java.util.List;
 public class Group implements FieldListBuilder<Group> {
 
     private static final int DEFAULT_GROUP_SIZE = 8;
+
     private final ArrayList<FixMessageFragment> contents;
 
     public Group(int expectedSize) {
@@ -38,126 +38,102 @@ public class Group implements FieldListBuilder<Group> {
     }
 
     public void add(FixMessageFragment element) {
-        contents.add(element);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(FieldType fieldType, String value) {
-        contents.add(new StringField(fieldType.tag(), value));
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(int tagNum, String value) {
-        FieldListBuilderHelper.add(contents, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(DataType type, int tagNum, String value) {
-        FieldListBuilderHelper.add(contents, type, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(FieldType field, int value) {
-        FieldListBuilderHelper.add(contents, field, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(int tagNum, int value) {
-        FieldListBuilderHelper.add(contents, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(DataType type, int tagNum, int value) {
-        FieldListBuilderHelper.add(contents, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(FieldType field, long value) {
-        FieldListBuilderHelper.add(contents, field, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(int tagNum, long value) {
-        FieldListBuilderHelper.add(contents, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(DataType type, int tagNum, long value) {
-        FieldListBuilderHelper.add(contents, type, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(FieldType fieldType, FixedPointNumber value) {
-        FieldListBuilderHelper.add(contents, fieldType, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(int tagNum, FixedPointNumber value) {
-        FieldListBuilderHelper.add(contents, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(DataType type, int tagNum, FixedPointNumber value) {
-        FieldListBuilderHelper.add(contents, type, tagNum, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group add(FieldType field, char value) {
-        FieldListBuilderHelper.add(contents, field, value);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getValue(int tagNum) {
-        for (FixMessageFragment field : contents) {
-            if (field.getTagNum() == tagNum) {
-                return (T) field.getValue();
-            }
-        }
-        return null;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getValue(FieldType fieldType) {
-        return getValue(fieldType.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group newGroup(FieldType fieldType) {
-        return newGroup(fieldType.tag());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group newGroup(FieldType fieldType, int expectedGroupSize) {
-        Group group = new Group(expectedGroupSize);
-        addGroup(fieldType.tag(), group);
-        return group;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group newGroup(int tagNum) {
-        Group group = new Group();
-        addGroup(tagNum, group);
-        return group;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Group newGroup(int tagNum, int expectedGroupSize) {
-        Group group = new Group(expectedGroupSize);
-        addGroup(tagNum, group);
-        return group;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void addGroup(int tagNum, Group group) {
@@ -174,16 +150,11 @@ public class Group implements FieldListBuilder<Group> {
     }
 
     public List<FixMessageFragment> getContents() {
-        return contents;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (FixMessageFragment fragment : contents) {
-            int tagNum = fragment.getTagNum();
-            sb.append(FieldType.forTag(tagNum) + "(" + tagNum + ")=" + fragment.getValue()).append(", ");
-        }
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -28,7 +28,6 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package org.sample;
 
 import fixio.netty.codec.FixMessageDecoder;
@@ -48,7 +47,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static org.mockito.Mockito.mock;
 
@@ -59,33 +57,28 @@ import static org.mockito.Mockito.mock;
 public class DecoderBenchmark {
 
     private static final String MESSAGE = "8=FIX.4.29=39635=BZ34=148949=CME50=G52=20141210-04:12:58.68956=17ACPON57=DUMMY369=36701180=0K41181=42811350=428011=ACP141818477867860=20141210-04:12:58.686533=3797=Y893=Y1028=Y1300=991369=9971:21373=31374=91375=1453=2448=000447=D452=7448=US,IL447=D452=54534=341=ACP141818477617384=60535=99499752041=ACP141818477621484=60535=99499752141=ACP141818477625384=180535=99499752210=228";
+
     private static ChannelHandlerContext ctx = mock(ChannelHandlerContext.class);
 
     @State(Scope.Thread)
     public static class ThreadState {
+
         private final ByteBuf byteBuf = Unpooled.wrappedBuffer(MESSAGE.getBytes(US_ASCII));
 
         private FixMessageDecoder decoder;
 
         @Setup(Level.Invocation)
         public void setup() {
-            decoder = new FixMessageDecoder();
-            byteBuf.resetReaderIndex();
-            byteBuf.retain();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     @Benchmark
     public void testDecodeMessage(ThreadState state) throws Exception {
-        state.decoder.channelRead(ctx, state.byteBuf);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static void main(String[] args) throws RunnerException {
-        Options opt = new OptionsBuilder()
-                .include(DecoderBenchmark.class.getSimpleName())
-                .build();
-
-        new Runner(opt).run();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

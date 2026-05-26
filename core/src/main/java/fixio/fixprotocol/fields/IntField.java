@@ -17,7 +17,6 @@ package fixio.fixprotocol.fields;
 
 import java.text.ParseException;
 import java.util.Objects;
-
 import static java.nio.charset.StandardCharsets.US_ASCII;
 
 public class IntField extends AbstractField<Integer> {
@@ -28,7 +27,7 @@ public class IntField extends AbstractField<Integer> {
         super(tagNum);
         int index = offset;
         int sign = 1;
-        switch (bytes[offset]) {
+        switch(bytes[offset]) {
             case '-':
                 sign = -1;
                 index++;
@@ -57,28 +56,25 @@ public class IntField extends AbstractField<Integer> {
 
     @Override
     public Integer getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        return String.valueOf(value).getBytes(US_ASCII);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int intValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IntField intField = (IntField) o;
-        return value == intField.value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

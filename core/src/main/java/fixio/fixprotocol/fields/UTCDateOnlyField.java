@@ -18,10 +18,8 @@ package fixio.fixprotocol.fields;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Objects;
-
 import static fixio.fixprotocol.FixConst.DATE_FORMATTER;
 import static java.nio.charset.StandardCharsets.US_ASCII;
-
 
 /**
  * Field representing Date represented in UTC (Universal Time Coordinated, also known as "GMT") in YYYYMMDD format.
@@ -56,43 +54,30 @@ public class UTCDateOnlyField extends AbstractField<LocalDate> {
     }
 
     public static LocalDate parse(String timestampString) throws ParseException {
-        if (timestampString != null) {
-            int len = timestampString.length();
-            if (len < 8) {
-                throw new ParseException("Unparseable date: '" + timestampString + "'", 0);
-            } else if (len == 8) {
-                return DATE_FORMATTER.parseLocalDate(timestampString);
-            } else {
-                return DATE_FORMATTER.parseLocalDate(timestampString.substring(0, 8));
-            }
-        }
-        throw new ParseException("Date is null", 0);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static LocalDate parse(byte[] bytes) throws ParseException {
-        return parse(new String(bytes, US_ASCII));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public byte[] getBytes() {
-        return DATE_FORMATTER.format(value).getBytes(US_ASCII);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public LocalDate getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UTCDateOnlyField that = (UTCDateOnlyField) o;
-        return Objects.equals(value, that.value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

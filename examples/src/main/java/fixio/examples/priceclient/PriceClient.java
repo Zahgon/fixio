@@ -25,6 +25,7 @@ import io.netty.channel.ChannelFuture;
 public class PriceClient {
 
     private final FixClient client;
+
     private final int port;
 
     public PriceClient(int port) {
@@ -37,17 +38,14 @@ public class PriceClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        PriceClient priceClient = new PriceClient(PriceServer.DEFAULT_PORT);
-        ChannelFuture channelFuture = priceClient.connect();
-        channelFuture.sync();
-        priceClient.shutdown();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public ChannelFuture connect() throws InterruptedException {
-        return client.connect("localhost", port);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void shutdown() throws InterruptedException {
-        client.disconnect();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

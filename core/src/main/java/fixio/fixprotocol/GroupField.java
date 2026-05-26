@@ -15,7 +15,6 @@
  */
 package fixio.fixprotocol;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,9 @@ import java.util.List;
 public class GroupField implements FixMessageFragment<List<Group>> {
 
     private static final int DEFAULT_SIZE = 2;
+
     private final List<Group> groups;
+
     private final int tagNum;
 
     protected GroupField(int tagNum, int expectedSize) {
@@ -39,35 +40,28 @@ public class GroupField implements FixMessageFragment<List<Group>> {
 
     @Override
     public List<Group> getValue() {
-        return groups;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int getTagNum() {
-        return tagNum;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void add(Group group) {
-        groups.add(group);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getGroupCount() {
-        return groups.size();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public List<Group> getGroups() {
-        return groups;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        int tagNum = getTagNum();
-        StringBuilder sb = new StringBuilder()
-                .append(FieldType.forTag(tagNum))
-                .append("(").append(tagNum).append(")=").append(getGroupCount());
-        sb.append("[");
-        groups.forEach(sb::append);
-        sb.append("]");
-        return sb.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
